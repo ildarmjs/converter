@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { Block } from './components/Block'
+import './App.scss'
+import { useConverter } from './hooks/useConverter'
+
+
+//api: https://cdn.cur.su/api/latest.json
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+	const {
+		fromPrice,
+		fromCurrency,
+		setFromCurrency,
+		onChangeFromPrice,
+		toPrice,
+		toCurrency,
+		onChangeToPrice,
+    setToCurrency
+	} = useConverter()
+
+
+
+	return (
+		<div className='App'>
+			<Block
+				value={fromPrice}
+				currency={fromCurrency}
+				onChangeCurrency={setFromCurrency}
+				onChangeValue={onChangeFromPrice}
+			/>
+			<Block
+				value={toPrice}
+				currency={toCurrency}
+				onChangeCurrency={setToCurrency}
+				onChangeValue={onChangeToPrice}
+			/>
+		</div>
+	)
 }
 
-export default App;
+export default App
